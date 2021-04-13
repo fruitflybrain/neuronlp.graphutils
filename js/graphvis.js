@@ -187,7 +187,7 @@ GvisInitGraphs = function () {
                     target: post_name,
                     size: Math.random(),
                     color: '#ccc',
-                    type: ['line', 'curve', 'arrow', 'curvedArrow'][Math.random() * 4 | 0]
+                    type: 'arrow'
                 });
                 connectivity.push([pre_name, post_name, N, inferred])
             }
@@ -209,6 +209,7 @@ GvisInitGraphs = function () {
                 },
                 settings: {
                     labelThreshold: 0,
+                    minArrowSize: 10,
                     defaultLabelColor: "#fff",
                     edgeLabelSize: 'proportional'
                 }
@@ -358,7 +359,7 @@ GvisInitGraphs = function () {
                     target: post_name,
                     size: Math.random(),
                     color: '#ccc',
-                    type: ['line', 'curve', 'arrow', 'curvedArrow'][Math.random() * 4 | 0]
+                    type: 'arrow'
                 });
                 connectivity.push([pre_name, post_name, N, inferred])
             }
@@ -378,6 +379,7 @@ GvisInitGraphs = function () {
                 },
                 settings: {
                     labelThreshold: 0,
+                    minArrowSize: 10,
                     defaultLabelColor: "#fff",
                     edgeLabelSize: 'proportional'
                 }
