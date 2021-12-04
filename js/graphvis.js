@@ -194,7 +194,7 @@ GvisInitGraphs = function () {
             window.G = g;
             $('#info-graph').html("");
             $('#info-graph').show();
-            $("#info-intro").hide();
+            // $("#info-intro").hide();
 
             g = {
                 nodes: [],
@@ -366,7 +366,7 @@ GvisInitGraphs = function () {
             window.G = g;
             $('#info-graph').html("");
             $('#info-graph').show();
-            $("#info-intro").hide();
+            // $("#info-intro").hide();
             g = {
                 nodes: [],
                 edges: []
