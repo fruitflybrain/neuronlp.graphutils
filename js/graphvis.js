@@ -328,7 +328,7 @@ GvisInitGraphs = function () {
                         label: pre_name,
                         x: Math.random(),
                         y: Math.random(),
-                        size: 0.5 + 0.5 * Math.random(),
+                        size: 0.5,
                         color: '#' + fullColorHex(Math.round(ffbomesh.meshDict[code]['color']['r'] * 255), Math.round(ffbomesh.meshDict[code]['color']['g'] * 255), Math.round(ffbomesh.meshDict[code]['color']['b'] * 255)),
                         code: code
                     });
@@ -347,7 +347,7 @@ GvisInitGraphs = function () {
                         label: post_name,
                         x: Math.random(),
                         y: Math.random(),
-                        size: 0.5 + 0.5 * Math.random(),
+                        size: 0.5,
                         color: '#' + fullColorHex(Math.round(ffbomesh.meshDict[code]['color']['r'] * 255), Math.round(ffbomesh.meshDict[code]['color']['g'] * 255), Math.round(ffbomesh.meshDict[code]['color']['b'] * 255)),
                         code: code
                     });
