@@ -96,7 +96,7 @@ GvisInitGraphs = function () {
             format: "nx",
             query: [
                 {
-                    action: { method: { add_connecting_synapses: {} } },
+                    action: { method: { add_connecting_synapses: {N:5} } },
                     object: { state: 0 }
                 }
             ],
@@ -269,7 +269,7 @@ GvisInitGraphs = function () {
             format: "nx",
             query: [
                 {
-                    action: { method: { add_connecting_synapses: {} } },
+                    action: { method: { add_connecting_synapses: {N:5} } },
                     object: { state: 0 }
                 }
             ],
