@@ -1,14 +1,23 @@
 GvisInitCallbacks = function () {
+    window.graphThreshold = 5;
     var html = `
     <div id="draggable-window" style="display: none; width: 512px; height:512px;">
         <button type="submit" class="close DraggableClass" onclick="$('#draggable-window').hide()">
             <span style = "font-size: 20px; text-shadow: none;">&times;</span>
         </button>
     <div id="draggable-windowheader"><div style="">Graph View <a id='refreshGraph'><i class="fa fa-refresh" style="color: #ffffff;"></i></a></div></div>
-    <div id ="info-graph" style="width: 100%; height: calc(100% - 42px); background-color: #28282d;"></div>
+    <div id ="info-graph-settings" style="width: 100%; height: 42px; background-color: #28282d;"></div>
+    <div id ="info-graph" style="width: 100%; height: calc(100% - 84px); background-color: #28282d;"></div>
     </div>
     `;
     $(".navbar-fixed-bottom")[0].insertAdjacentHTML('afterend', html);
+    window.updateGraphView = function() {
+        var threshold = parseInt($('#graph_threshold')[0].value);
+        window.graphThreshold = threshold;
+        window.refreshConnectivity();
+    }
+    $('#info-graph-settings').html('<label for="graph_threshold" style="color:white">Synapse Threshold: </label><input type="text" id="graph_threshold" name="graph_threshold" value="5" onchange="updateGraphView()" style="width:50px">');
+    
     $("#refreshGraph").on('click', function (e) {
         window.refreshConnectivity();
     });
@@ -96,7 +105,7 @@ GvisInitGraphs = function () {
             format: "nx",
             query: [
                 {
-                    action: { method: { add_connecting_synapses: {N:5} } },
+                    action: { method: { add_connecting_synapses: {N: window.graphThreshold} } },
                     object: { state: 0 }
                 }
             ],
@@ -192,7 +201,7 @@ GvisInitGraphs = function () {
                 connectivity.push([pre_name, post_name, N, inferred])
             }
             window.G = g;
-            $('#info-graph').html("");
+            $('#info-graph').html('');
             $('#info-graph').show();
             // $("#info-intro").hide();
 
@@ -269,7 +278,7 @@ GvisInitGraphs = function () {
             format: "nx",
             query: [
                 {
-                    action: { method: { add_connecting_synapses: {N:5} } },
+                    action: { method: { add_connecting_synapses: {N:window.graphThreshold} } },
                     object: { state: 0 }
                 }
             ],
@@ -364,7 +373,7 @@ GvisInitGraphs = function () {
                 connectivity.push([pre_name, post_name, N, inferred])
             }
             window.G = g;
-            $('#info-graph').html("");
+            $('#info-graph').html('');
             $('#info-graph').show();
             // $("#info-intro").hide();
             g = {
