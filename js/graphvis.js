@@ -178,7 +178,7 @@ GvisInitGraphs = function () {
                             var code = key;
                         }
                     }
-                    console.log('#' + fullColorHex(Math.round(ffbomesh.meshDict[code]['color']['r'] * 255), Math.round(ffbomesh.meshDict[code]['color']['g'] * 255), Math.round(ffbomesh.meshDict[code]['color']['b'] * 255)));
+                    // console.log('#' + fullColorHex(Math.round(ffbomesh.meshDict[code]['color']['r'] * 255), Math.round(ffbomesh.meshDict[code]['color']['g'] * 255), Math.round(ffbomesh.meshDict[code]['color']['b'] * 255)));
                     g.nodes.push({
                         id: post_name,
                         label: post_name,
@@ -223,9 +223,9 @@ GvisInitGraphs = function () {
                     edgeLabelSize: 'proportional'
                 }
             });
-            s.bind('overNode', (e) => { dynamicNeuronMenu.dispatch.highlight(e['data']['node']['code']); })
-            s.bind('clickNode', (e) => { dynamicNeuronMenu.dispatch.toggle(e['data']['node']['code']); })
-            s.bind('outNode', (e) => { dynamicNeuronMenu.dispatch.resume(); })
+            s.bind('overNode', (e) => { ffbomesh.highlight(e['data']['node']['code']); })
+            s.bind('clickNode', (e) => { ffbomesh.toggleVis(e['data']['node']['code']); })
+            s.bind('outNode', (e) => { ffbomesh.highlight(); })
             s.startForceAtlas2({ worker: true, barnesHutOptimize: true, slowDown: 1, linLogMode: 1 });
             window.sigmagraph = s;
             sigma.plugins.dragNodes(s, s.renderers[0]);
@@ -248,19 +248,19 @@ GvisInitGraphs = function () {
             return matches;
         }
 
-        pinHover = function (query) {
-            ffbomesh.unpinAll();
+        hover = function (query) {
             matches = getMatches(query);
-            for (var i = 0; i < matches.length; i++) {
-                ffbomesh.pin(matches[i]);
-            }
+            // for (var i = 0; i < matches.length; i++) {
+            //     ffbomesh.pin(matches[i]);
+            // }
+            ffbomesh.highlight(matches);
         }
 
         toggleClick = function (query) {
-            ffbomesh.unpinAll();
+            // ffbomesh.unpinAll();
             matches = getMatches(query);
             for (var i = 0; i < matches.length; i++) {
-                ffbomesh.toggle(matches[i]);
+                ffbomesh.toggleVis(matches[i]);
             }
         }
 
@@ -286,7 +286,7 @@ GvisInitGraphs = function () {
             temp: true
         }, { success: graphDataCallback });
         _this.status.on("change", function (e) {
-            console.log(_this.graph);
+            // console.log(_this.graph);
             nodes = _this.graph['nodes'];
             edges = _this.graph['edges'];
             let outgoing_edges = edges.filter(edge => nodes[edge[0]].class == 'Neuron');
@@ -350,7 +350,7 @@ GvisInitGraphs = function () {
                             var code = key;
                         }
                     }
-                    console.log('#' + fullColorHex(Math.round(ffbomesh.meshDict[code]['color']['r'] * 255), Math.round(ffbomesh.meshDict[code]['color']['g'] * 255), Math.round(ffbomesh.meshDict[code]['color']['b'] * 255)));
+                    // console.log('#' + fullColorHex(Math.round(ffbomesh.meshDict[code]['color']['r'] * 255), Math.round(ffbomesh.meshDict[code]['color']['g'] * 255), Math.round(ffbomesh.meshDict[code]['color']['b'] * 255)));
                     g.nodes.push({
                         id: post_name,
                         label: post_name,
@@ -393,9 +393,9 @@ GvisInitGraphs = function () {
                     edgeLabelSize: 'proportional'
                 }
             });
-            s.bind('overNode', (e) => { pinHover(e['data']['node']['label']); })
+            s.bind('overNode', (e) => { hover(e['data']['node']['label']); })
             s.bind('clickNode', (e) => { toggleClick(e['data']['node']['label']); })
-            s.bind('outNode', (e) => { ffbomesh.unpinAll(); })
+            s.bind('outNode', (e) => { ffbomesh.highlight(); })
             s.startForceAtlas2({ worker: true, barnesHutOptimize: true, slowDown: 1, linLogMode: 1 });
             window.sigmagraph = s;
             sigma.plugins.dragNodes(s, s.renderers[0]);
